@@ -44,3 +44,38 @@ https://pythonprogramming.net/python-pickle-module-save-objects-serialization/
 This site gave short examples of pickling and good reasons to use pickling to store python objects.  
 
 
+Demo 1:  Pickling and Unpickling  
+The basic steps are to first import pickle to use it, then input contact information to a list, which is a python object.  Next, open a file to write bytes in Python3+, then use pickle.dump() to put the list into the opened file, then close the file.  
+
+```
+#######################################################
+# Title:  Assignment07 Contact Information
+# Dev:  BSpadavecchia
+# Date:  February 28, 2022
+# Change log: (Who,When,What)
+# BSpadavecchia, 02-28-2022, Created Script
+#########################################################
+# Description:  Demonstration of pickling and error handling in python.
+
+# Pickling demo
+
+import pickle
+
+# Collect contact information to pickle
+contact_last_name = str(input("Enter last name of contact:  "))
+contact_first_name = str(input("Enter first name of contact  "))
+contact_email = str(input("Enter contact email  "))
+contact_cell = str(input("Enter cell number of contact  "))
+contact_lst = [contact_last_name, contact_first_name, contact_email, contact_cell]
+print(contact_lst)
+
+
+# Save data to a text file using pickle.dump
+print("Saving contact data to a file using pickle.dump")
+myfile = open("contacts.txt", "ab")
+pickle.dump(contact_lst, myfile)
+myfile.close()
+print("Contact data pickled and saved")
+
+
+
