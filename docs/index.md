@@ -77,6 +77,7 @@ print(myfile)
 ```
 
 Figure 1 Demo 1 Code to pickle to a file 
+[alt text](https://github.com/Barb4000/IntroToProg-Python-Mod7/blob/main/docs/Figure2.png)("tooltip text")
 
 Figure 2 Running Demo 1 from Command Prompt
 
