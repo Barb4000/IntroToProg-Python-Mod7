@@ -198,7 +198,7 @@ The script below is an example of creating custom classes for error handling.  T
 
 
 ```
-#Error Handling Creating Custom Classes
+Error Handling Creating Custom Classes
 print("Press Enter to re-run the program with error handling")
 print()
 
@@ -228,7 +228,7 @@ except Exception as e:
 ```  
 Figure 8 Example of Custom Classes for Error Handling
 
-##Conclusion
+Conclusion
 The process of learning about pickling files was eye opening to learn about the amount of time that can be saved by serializing the data.
 The small files might not make a difference to pickle but I can imagine that large files that  take a hundredth of the time would be a great time saver. 
 I did learn to limit nesting on the try except blocks to avoid creating fewer errors.
