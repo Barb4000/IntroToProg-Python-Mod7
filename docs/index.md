@@ -149,11 +149,15 @@ try:
 except Exception as e:
     print("\n" + "Error: " + "\n")
     print(e, e.__doc__, e.__str__, type(e), sep="\n")
+```
 
 Figure 5 Custom Class Exception script checking last name and cell phone number
 
-Figure 6 Error message for missing last name
+Figure 6 Error message from running script through command prompt
+
 [alt text](https://github.com/Barb4000/IntroToProg-Python-Mod7/blob/main/docs/Figure%206.png)("tooltip text")
+
+
 
 ```
 try:
