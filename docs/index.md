@@ -45,18 +45,9 @@ This site gave short examples of pickling and good reasons to use pickling to st
 
 
 Demo 1:  Pickling and Unpickling  
-The basic steps are to first import pickle to use it, then input contact information to a list, which is a python object.  Next, open a file to write bytes in Python3+, then use pickle.dump() to put the list into the opened file, then close the file.  
+The basic steps are to first import pickle to use it, then input contact information to a list, which is a python object.  Next, open a file to write bytes in Python3+, then use pickle.dump() to put the list into the opened file, then close the file.  Pickle.load will read data from a binary file and allow it to be saved to a list.
 
 ```
-#######################################################
-# Title:  Assignment07 Contact Information
-# Dev:  BSpadavecchia
-# Date:  February 28, 2022
-# Change log: (Who,When,What)
-# BSpadavecchia, 02-28-2022, Created Script
-#########################################################
-# Description:  Demonstration of pickling and error handling in python.
-
 # Pickling demo
 
 import pickle
@@ -70,7 +61,7 @@ contact_lst = [contact_last_name, contact_first_name, contact_email, contact_cel
 print(contact_lst)
 
 ```
-# Save data to a text file using pickle.dump
+Save data to a text file using pickle.dump
 print("Saving contact data to a file using pickle.dump")
 myfile = open("contacts.txt", "ab")
 pickle.dump(contact_lst, myfile)
@@ -81,25 +72,52 @@ print("Contact data pickled and saved")
 print("Reading contact data to a list from a binary file using pickle.load")
 myfile = open("contacts.txt", "rb")
 mydata = pickle.load(myfile)
-print(mydata)
 myfile.close()
+print(myfile)
+```
+
+Figure 1 Demo 1 Code to pickle to a file 
+
+Figure 2 Running Demo 1 from Command Prompt
+
+Figure 3 Binary file Contacts.txt
+
+
+##Error Handling
+Error handling with a try except block to check if a binary file exists before attempting to read the file. 
+The except will capture error information in the variable “e” and print out the error documentation and type.
 
 ```
-## Error Handling demo  
-print("Press Enter to continue to Error Handling Demo")  
+# Error Handling demo
 print()
-# Using the Exception Class to hold information about an error  
+# Using the Exception Class to hold information about an error
 try:
-    new_contact_lst = contact_last_name + contact_cell  
-    print(new_contact_lst)  
-except FileNotFoundError as e:  
-    print("\n" + "Contacts.txt file must exist prior to running this script.  Error report: "+"\n")  
+    myfile = open("Contacts.dat", "rb")
+except FileNotFoundError as e:
+    print("\n" + "Contacts.dat file must exist prior to running this script.  Error report: "+"\n")
     print(e, e.__doc__, e.__str__, type(e), sep="\n")
+
+try:
+    new_contact_lst = contact_last_name + contact_first_name + contact_email + contact_cell
+    print(new_contact_lst)
 except Exception as e:
     print("\n" + "An unspecified error occurred?  Error report:  " + "\n")
     print(e, e.__doc__, e.__str__, type(e), sep="\n")
+```
 
-#Error Handling Creating Custom Classes
+Figure 4 Error Handling showing try except blocks
+
+##Error Handling Creating Custom Classes
+Custom classes allow error messages to be written for specific cases and provide a clearer message for the user.  
+In this example, a custom class is created to check if the name fields for last name is alphabetical and that it contains at least one character. 
+The cell phone number is checked to see that it is numeric and contains ten numbers.  
+These custom error messages will be used if they are called from the try except block.  
+If the last name is numeric, the AlphaError Exception is called by using the “raise” command and the custom message 
+“Please use alphabetical letter for name fields” is displayed.
+
+```
+#Error Handling Creating Custom Classes Demo
+
 print("Press Enter to re-run the program with error handling")
 print()
 
@@ -109,46 +127,28 @@ class AlphaError(Exception):
         return 'Please use alphabetical letter for name fields'
 class EntryError(Exception):
     def _str_(self):
-        return "Entry not accepted:  Please enter at least one character in contact_last_name"
-class NumError(Exception):
-    def _str_(self):
-        return "Please use only numbers in cell_number field"
-class CellNumError(Exception):
-    def _str_(self):
-        return "Please use 10 numbers in cell_number field"
-
-try:
+        return "Entry not accepted:  Please enter at least one character for last name"
+ 
+ try:
     contact_last_name = input("Enter your contact's last name:  ")
     if contact_last_name.isnumeric():
         raise AlphaError()
     elif len(contact_last_name) == 0:
         raise EntryError()
-    try:
-        cell_number = input("Enter your contact's cell phone number:  ")
-        if cell_number.isalpha():
-            raise NumError()
-        elif len(cell_number)!=10:
-            raise CellNumError()
-        else:
-        # Save data to a text file using pickle.dump
-            new_contact_lst = [contact_last_name, contact_first_name, contact_email, cell_number]
-            print("\n" "Entry complete.  Preparing to save to contacts.txt")
-            myfile = open("contacts.txt", "ab")
-            print("Saving contact data to a file using pickle.dump")
-            pickle.dump(new_contact_lst, myfile)
-            myfile.close()
-            print("Contact data pickled and saved")
-# Read and display saved data using pickle.load
-            print("Reading contact data to a list from a binary file using pickle.load")
-            myfile = open("contacts.txt", "rb")
-            mydata = pickle.load(myfile)
-            print(mydata)
-            myfile.close()
-            print("Program for Assignment07 is over")
-    except Exception as e:
-        print("\n" + "Error: " + "\n")
-        print(e)
 except Exception as e:
     print("\n" + "Error: " + "\n")
     print(e, e.__doc__, e.__str__, type(e), sep="\n")
+try:
+    contact_first_name = input("Enter your contact's first name:  ")
+    if contact_first_name.isnumeric():
+        raise AlphaError()
+    elif len(contact_first_name) == 0:
+        raise EntryError()
+except Exception as e:
+    print("\n" + "Error: " + "\n")
+    print(e, e.__doc__, e.__str__, type(e), sep="\n")
+
+
+
+
 
