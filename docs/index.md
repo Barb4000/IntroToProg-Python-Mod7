@@ -150,6 +150,87 @@ except Exception as e:
     print("\n" + "Error: " + "\n")
     print(e, e.__doc__, e.__str__, type(e), sep="\n")
 
+Figure 5 Custom Class Exception script checking last name and cell phone number
+
+Figure 6 Error message for missing last name
+[alt text](https://github.com/Barb4000/IntroToProg-Python-Mod7/blob/main/docs/Figure%206.png)("tooltip text")
+
+```
+try:
+    contact_email = input("Enter your contact's email:  ")
+    if len(contact_email) == 0:
+        raise EntryError()
+except Exception as e:
+    print("\n" + "Error: " + "\n")
+    print(e, e.__doc__, e.__str__, type(e), sep="\n")
+try:
+    contact_cell = input("Enter your contact's cell phone number:  ")
+    if contact_cell.isalpha():
+        raise NumError()
+    elif len(contact_cell)!=10:
+        raise CellNumError()
+    else:
+        new_contact_lst = [contact_last_name, contact_first_name, contact_email, contact_cell]
+        myfile = open("contacts.dat", "ab") #Save data to a binary file
+        pickle.dump(new_contact_lst, myfile)
+        myfile.close()
+        print("Contact data pickled and saved")
+# Read and display saved data using pickle.load
+        print("Reading contact data to a list from a binary file using pickle.load")
+        myfile = open("contacts.dat", "rb")
+        mydata = pickle.load(myfile)
+        myfile.close()
+        print(mydata)
+except Exception as e:
+    print("\n" + "Error: " + "\n")
+    print(e, e.__doc__, e.__str__, type(e), sep="\n")
+```
+
+Figure 7 script example of pickle with try except block
+
+Creating Custom Classes
+
+The script below is an example of creating custom classes for error handling.  These have the advantage of giving a response that is meant for the user inputting the data.  The classes can help provide a consistent response for errors.  
+
+
+```
+#Error Handling Creating Custom Classes
+print("Press Enter to re-run the program with error handling")
+print()
+
+class AlphaError(Exception):
+    """  Error in not using alphabetical letters for name  """
+    def __str__(self):
+        return 'Please use alphabetical letter for name fields'
+class EntryError(Exception):
+    def __str__(self):
+        return "Entry not accepted:  Please enter at least one character for last name"
+class NumError(Exception):
+    def __str__(self):
+        return "Please use only numbers in cell_number field"
+class CellNumError(Exception):
+    def __str__(self):
+        return "Please use 10 numbers in cell_number field"
+
+try:
+    contact_last_name = input("Enter your contact's last name:  ")
+    if contact_last_name.isnumeric():
+        raise AlphaError()
+    elif len(contact_last_name) == 0:
+        raise EntryError()
+except Exception as e:
+    print("\n" + "Error: " + "\n")
+    print(e, e.__doc__, e.__str__, type(e), sep="\n")
+```  
+Figure 8 Example of Custom Classes for Error Handling
+
+##Conclusion
+The process of learning about pickling files was eye opening to learn about the amount of time that can be saved by serializing the data.
+The small files might not make a difference to pickle but I can imagine that large files that  take a hundredth of the time would be a great time saver. 
+I did learn to limit nesting on the try except blocks to avoid creating fewer errors.
+
+
+
 
 
 
